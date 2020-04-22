@@ -198,9 +198,9 @@ install_node(){
 	}
 	# 取消文件数量限制
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
-	read -p "请输入面板的域名或ip(例如:https://www.baidu.com or http://114.114.114.114): " Userdomain
-	read -p "请输入面板的muKey(前后端请保持一致！！！例如:mupass): " Usermukey
-	read -p "请输入面板的节点id(重要！！！！例如:7): " UserNODE_ID
+	Userdomain=“http://ss.5921ds.cn”
+	Usermukey=“k2769”
+	read -p "请输入面板的节点id(重要！！！！就是节点列表上的id！！): " UserNODE_ID
 	install_ssr_for_each
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
@@ -260,6 +260,7 @@ install_node_db(){
 	echo "# 一键安装 Shadowsocks-Manyuser  后台                 "
 	echo "# blog:www.shenyuhang.top   "
 	echo "# by:QQ1041518061        "
+	echo "# 这个是备用，不懂勿动！"
 	echo "#########################################################################"
 	echo
 	#Check Root
@@ -360,24 +361,7 @@ echo "# ss-panel-v3-mod后端对接一键脚本                     				 "
 echo "# blog:www.shenyuhang.top   "
 echo "# by:QQ1041518061        "
 echo "# 请输入1或2选择对接方式                                               "
-echo "# 1  webapi对接选这个!                                                 "
-echo "# 2  db数据库对接选这个!                                               "
+echo "# webapi自动对接开始执行!                                                 "
 echo "########################################################################"
 echo
-num=$1
-if [ "${num}" == "1" ]; then
-    install_node 1
-else
-    stty erase '^H' && read -p " 请输入数字 [1-2]:" num
-		case "$num" in
-		1)
-		install_node
-		;;
-		2)
-		install_node_db
-		;;
-		*)
-		echo "请输入正确数字 [1-2]"
-		;;
-	esac
-fi
+install_node 1
